@@ -1,0 +1,47 @@
+id: kubestellar-demo-plugin
+name: KubeStellar Demo Plugin
+version: 1.0.0
+description: A demonstration plugin for KubeStellar UI with cluster management capabilities
+author: CNCF LFX Mentee
+license: Apache-2.0
+
+endpoints:
+  - path: /status
+    method: GET
+    handler: GetClusterStatusHandler
+    description: Get plugin and cluster status
+  - path: /clusters
+    method: GET
+    handler: ListClustersHandler
+    description: List all managed clusters
+  - path: /onboard
+    method: POST
+    handler: OnboardClusterHandler
+    description: Onboard a new cluster
+  - path: /detach
+    method: POST
+    handler: DetachClusterHandler
+    description: Detach a cluster
+  - path: /health
+    method: GET
+    handler: HealthCheckHandler
+    description: Plugin health check
+
+dependencies:
+  - kubectl
+  - clusteradm
+
+permissions:
+  - cluster.read
+  - cluster.write
+  - namespace.create
+
+compatibility:
+  kubestellar: ">=0.21.0"
+  go: ">=1.21"
+  kubernetes: ">=1.24"
+
+configuration:
+  auto_cleanup: true
+  max_clusters: 50
+  timeout_seconds: 300
