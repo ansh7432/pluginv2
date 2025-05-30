@@ -1,7 +1,6 @@
 package main
 
 import (
-    "encoding/json"
     "fmt"
     "math/rand"
     "net/http"
@@ -74,7 +73,7 @@ func (p *TestClusterPlugin) Initialize(config map[string]interface{}) error {
     p.clusters = make(map[string]*ClusterInfo)
     p.startTime = time.Now()
     
-    // Add some demo clusters with variety
+    // Add some demo clusters
     p.clusters["prod-cluster-east"] = &ClusterInfo{
         ClusterName: "prod-cluster-east",
         Status:      "ready",
@@ -114,9 +113,9 @@ func (p *TestClusterPlugin) Initialize(config map[string]interface{}) error {
 func (p *TestClusterPlugin) GetMetadata() PluginMetadata {
     return PluginMetadata{
         ID:          "kubestellar-demo-plugin",
-        Name:        "KubeStellar Demo Plugin v1.0 - Fresh from GitHub", // ← This will change in auto-update tests
+        Name:        "KubeStellar Demo Plugin v1.0 - Working Build", // ← This will show successful build
         Version:     "1.0.0",
-        Description: "Demonstration plugin for KubeStellar cluster management with auto-update support",
+        Description: "Demonstration plugin for KubeStellar cluster management",
         Author:      "CNCF LFX Mentee",
         Endpoints: []EndpointConfig{
             {Path: "/status", Method: "GET", Handler: "GetClusterStatusHandler", Description: "Get plugin status"},
